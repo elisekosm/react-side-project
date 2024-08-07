@@ -1,0 +1,35 @@
+.App {
+  text-align: center;
+}
+
+p {
+  font-size: 1.2em;
+}
+
+button {
+  margin-bottom: 2em;
+}
+
+nav {
+  background-color: #a0a5af;
+  padding: 1em;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav li {
+  display: inline;
+  margin: 0 1em;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+h1 {
+  color: purple;
+}
