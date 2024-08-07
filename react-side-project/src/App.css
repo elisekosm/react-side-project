@@ -1,7 +1,7 @@
 .App {
   text-align: center;
 }
-
+/* 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,11 +35,7 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-h1 {
-  color: rebeccapurple;
-}
+} */
 
 p {
   font-size: 1.2em;
@@ -47,4 +43,28 @@ p {
 
 button {
   margin-bottom: 2em;
+}
+
+nav {
+  background-color: #a0a5af;
+  padding: 1em;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav li {
+  display: inline;
+  margin: 0 1em;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+h1 {
+  color: purple;
 }
