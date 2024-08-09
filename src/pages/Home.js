@@ -1,12 +1,11 @@
 import React from 'react';
-// import Posts from '../Posts/Posts';
+import Typography from '@mui/material/Typography';
 
 function Home() {
     return (
         <div>
-            <h1>Home Page</h1>
-            <p>Welcome to the Home Page.</p>
-            {/* <Posts /> */}
+            <Typography variant = "h4" style={{padding: '0.5em'}}>Home Page</Typography>
+            <Typography variant = "body">Welcome to the Home Page.</Typography>
         </div>
     );
 }

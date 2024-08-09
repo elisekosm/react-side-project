@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 
 function Posts() {
     const [posts, setPosts] = useState([]);
@@ -26,9 +29,17 @@ function Posts() {
 
     return (
         <div>
-            <h1>Random Cat Facts</h1>
-            <button onClick={handleClick}>Generate Cat Fact</button>
-            <p>{posts.data}</p>
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
+                    <Typography variant = "h4" style={{padding: '0.5em'}}>Random Cat Facts</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <Button onClick={handleClick} variant="contained">Generate Cat Fact</Button>                   
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography variant = "body" style={{margin: '50px'}}>{posts.data}</Typography>
+                </Grid>
+            </Grid>
         </div>
     );
 }

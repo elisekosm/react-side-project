@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import Typography from '@mui/material/Typography';
 
 function Header() {
     return (
         <div>
-            <h1>Elise's Demo React Project</h1>
-            <br></br>
+            <Typography variant="h1" style={{padding: '0.25em'}}>
+                Elise's Demo React Project
+            </Typography>
         </div>
     );
 }
