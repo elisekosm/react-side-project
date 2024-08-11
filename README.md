@@ -6,6 +6,7 @@ This project was a quick exploration into React.
 - Create and develop a React app
 - Make API calls in a React app
 - Material UI package
+- GitHub actions CI checks on a PR
 
 ## Available Scripts
  
