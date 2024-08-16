@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-// import cat from './react-side-project/public/cute-cat.png';
 
 function Posts() {
     const [posts, setPosts] = useState([]);
@@ -40,11 +39,11 @@ function Posts() {
                 <Grid item xs={12}>
                     <Button onClick={handleClick} variant="contained">Generate Cat Fact</Button>                   
                 </Grid>
-                <Grid item xs={2}/>
-                <Grid item xs={8}>
+                <Grid item xs={3}/>
+                <Grid item xs={6}>
                     <Typography variant = "body" style={{margin: '50px'}}>{posts.data}</Typography>
                 </Grid>
-                <Grid item xs={2}/>
+                <Grid item xs={3}/>
             </Grid>
         </div>
     );
