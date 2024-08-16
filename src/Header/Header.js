@@ -1,18 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Typography from '@mui/material/Typography';
 
 function Header() {
-    const [message, setMessage] = useState('Click the button...');
-
-    const handleClick = () => {
-        setMessage('You clicked the button!');
-    }
-
     return (
         <div>
-            <h1>Elise's Demo React Project</h1>
-            <p>{message}</p>
-            <button onClick={handleClick}>Click Me</button>
-            <br></br>
+            <Typography variant="h1" style={{padding: '0.25em'}}>
+                Elise's Demo React Project
+            </Typography>
         </div>
     );
 }
