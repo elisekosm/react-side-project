@@ -6,6 +6,6 @@ test('renders header', () => {
   render(<BrowserRouter>
       <App />
     </BrowserRouter>)
-  const headerElement = screen.getByText(/Elise's Demo React Project/);
+  const headerElement = screen.getByText(/Random Cat Fact Generator/);
   expect(headerElement).toBeInTheDocument();
 });
