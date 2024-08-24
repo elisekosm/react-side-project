@@ -31,7 +31,7 @@ function Posts() {
         <div>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <img src={"/cute-cat.png"} alt="cat-pic" height="100" style={{'padding-top': '2em'}}/>
+                    <img src={"./react-side-project/cute-cat.png"} alt="cat-pic" height="100" style={{'padding-top': '2em'}}/>
                 </Grid>
                 <Grid item xs={12}>
                     <Typography variant = "h4" style={{padding: '0.5em'}}>Random Cat Facts</Typography>
