@@ -13,8 +13,8 @@ function App() {
       <Navbar />
 
       <Routes>
-          <Route path="/" element={<CatFacts />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/react-side-project" element={<CatFacts />} />
+          <Route path="/react-side-project/about" element={<About />} />
       </Routes>
     </div>
   );
