@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import ImageGenerator from '../image-generator/image-generator';
 import axios from 'axios';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Posts() {
     const [posts, setPosts] = useState([]);
@@ -35,8 +35,8 @@ function Posts() {
                     key: api_key, // process.env.IMAGE_GENERATOR_API_KEY,
                     prompt: prompt,
                     negative_prompt: "",
-                    width: "512",
-                    height: "512",
+                    width: "400",
+                    height: "400",
                     safety_checker: false,
                     seed: null,
                     samples: 1,
@@ -62,11 +62,18 @@ function Posts() {
             setLoading(false);
         }
     }
-    
+
     if (loading) {
         return (
             <div>
-                <p>Loading cat facts...</p>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <Typography variant="body" style={{ margin: '50px' }}>Loading cat facts...</Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <CircularProgress />
+                    </Grid>
+                </Grid>
             </div>
         );
     }
@@ -75,19 +82,16 @@ function Posts() {
         <div>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <img src={"/cute-cat.png"} alt="cat-pic" height="100" style={{'padding-top': '2em'}}/>
+                    <Typography variant="h4" style={{ padding: '0.5em' }}>Random Cat Facts</Typography>
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant = "h4" style={{padding: '0.5em'}}>Random Cat Facts</Typography>
+                    <Button onClick={handleClick} variant="contained">Generate Cat Fact</Button>
                 </Grid>
-                <Grid item xs={12}>
-                    <Button onClick={handleClick} variant="contained">Generate Cat Fact</Button>                   
-                </Grid>
-                <Grid item xs={3}/>
+                <Grid item xs={3} />
                 <Grid item xs={6}>
-                    <Typography variant = "body" style={{margin: '50px'}}>{posts.data}</Typography>
+                    <Typography variant="body" style={{ margin: '50px' }}>{posts.data}</Typography>
                 </Grid>
-                <Grid item xs={3}/>
+                <Grid item xs={3} />
                 <Grid item xs={12}>
                     {error && <p style={{ color: 'red' }}>{error}</p>}
                     {imageUrl && <img src={imageUrl} alt="Generated" style={{ marginTop: '20px', maxWidth: '100%' }} />}
