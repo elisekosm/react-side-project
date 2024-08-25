@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import ImageGenerator from '../image-generator/image-generator';
+import axios from 'axios';
 
 function Posts() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [imageUrl, setImageUrl] = useState('');
+    const [error, setError] = useState('');
 
     const handleClick = () => {
         setLoading(true);
@@ -14,9 +18,49 @@ function Posts() {
             .then(response => response.json())
             .then(data => {
                 setPosts(data);
-                setLoading(false);
+                generateImage(data.data[0]);
             })
             .catch(error => console.error('Error fetching data:', error));
+    }
+
+    const generateImage = async (prompt) => {
+        setError('');
+        try {
+            let url = 'https://modelslab.com/api/v6/realtime/text2img'; //process.env.IMAGE_GENERATOR_URL;
+            let api_key = 'DLkzpNj1yYvfCx9lHJXAIyyQSggTqGU3lNE1tiLnJuSWoht1ulFwyIL2OO30'; // process.env.IMAGE_GENERATOR_API_KEY;
+
+            const response = await axios.post(
+                url, //process.env.IMAGE_GENERATOR_URL,
+                {
+                    key: api_key, // process.env.IMAGE_GENERATOR_API_KEY,
+                    prompt: prompt,
+                    negative_prompt: "",
+                    width: "512",
+                    height: "512",
+                    safety_checker: false,
+                    seed: null,
+                    samples: 1,
+                    base64: false,
+                    webhook: null,
+                    track_id: null
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            );
+
+            if (response.status !== 200) {
+                setError('Failed to generate image.');
+            } else {
+                setImageUrl(response.data.output[0]);
+            }
+        } catch (err) {
+            setError('Failed to generate image.');
+        } finally {
+            setLoading(false);
+        }
     }
     
     if (loading) {
@@ -44,6 +88,10 @@ function Posts() {
                     <Typography variant = "body" style={{margin: '50px'}}>{posts.data}</Typography>
                 </Grid>
                 <Grid item xs={3}/>
+                <Grid item xs={12}>
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                    {imageUrl && <img src={imageUrl} alt="Generated" style={{ marginTop: '20px', maxWidth: '100%' }} />}
+                </Grid>
             </Grid>
         </div>
     );
