@@ -26,13 +26,10 @@ function Posts() {
     const generateImage = async (prompt) => {
         setError('');
         try {
-            let url = 'https://modelslab.com/api/v6/realtime/text2img'; //process.env.IMAGE_GENERATOR_URL;
-            let api_key = 'DLkzpNj1yYvfCx9lHJXAIyyQSggTqGU3lNE1tiLnJuSWoht1ulFwyIL2OO30'; // process.env.IMAGE_GENERATOR_API_KEY;
-
             const response = await axios.post(
-                url, //process.env.IMAGE_GENERATOR_URL,
+                process.env.REACT_APP_IMAGE_GENERATOR_URL,
                 {
-                    key: api_key, // process.env.IMAGE_GENERATOR_API_KEY,
+                    key: process.env.REACT_APP_IMAGE_GENERATOR_API_KEY,
                     prompt: prompt,
                     negative_prompt: "",
                     width: "400",
@@ -51,7 +48,7 @@ function Posts() {
                 }
             );
 
-            if (response.status !== 200) {
+            if (response.status !== 200 && response.status !== 204) {
                 setError('Failed to generate image.');
             } else {
                 setImageUrl(response.data.output[0]);
@@ -68,7 +65,10 @@ function Posts() {
             <div>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <Typography variant="body" style={{ margin: '50px' }}>Loading cat facts...</Typography>
+                        <Typography variant="h4" style={{ padding: '0.5em' }}>Random Cat Facts</Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="body" style={{ padding: '0.5em' }}>Loading cat facts...</Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <CircularProgress />
