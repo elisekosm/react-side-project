@@ -24,10 +24,10 @@ function About() {
                 <Grid item xs={3} />
                 <Grid item xs={5} />
                 <Grid item xs={1}>
-                    <img src={"/github-logo.png"} onClick={githubButtonClick} alt="github-icon" height="50" style={{ 'padding-top': '2em' }} />
+                    <img src={process.env.PUBLIC_URL + "/github-logo.png"} onClick={githubButtonClick} alt="github-icon" height="50" style={{ 'padding-top': '2em' }} />
                 </Grid>
                 <Grid item xs={1}>
-                    <img src={"/linkedin-logo.png"} onClick={linkedinButtonClick} alt="linkedin-icon" height="50" style={{ 'padding-top': '2em' }} />
+                    <img src={process.env.PUBLIC_URL + "/linkedin-logo.png"} onClick={linkedinButtonClick} alt="linkedin-icon" height="50" style={{ 'padding-top': '2em' }} />
                 </Grid>
             </Grid>
         </div >
