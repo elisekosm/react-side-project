@@ -6,8 +6,8 @@ import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 
-function Posts() {
-    const [posts, setPosts] = useState([]);
+function CatFacts() {
+    const [posts, setCatFact] = useState([]);
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState('');
     const [error, setError] = useState('');
@@ -15,10 +15,10 @@ function Posts() {
     const handleClick = () => {
         setLoading(true);
 
-        fetch('https://meowfacts.herokuapp.com/')
+        fetch(process.env.REACT_APP_CAT_FACT_URL)
             .then(response => response.json())
             .then(data => {
-                setPosts(data);
+                setCatFact(data);
                 generateImage(data.data[0]);
             })
             .catch(error => console.error('Error fetching data:', error));
@@ -85,7 +85,7 @@ function Posts() {
                 <Grid item xs={12}>
                     <Typography variant="h4" style={{ padding: '0.5em' }}>Random Cat Facts</Typography>
                 </Grid>
-                
+
                 <Grid item xs={12}>
                     <Button onClick={handleClick} variant="contained">Generate Cat Fact</Button>
                 </Grid>
@@ -111,4 +111,4 @@ function Posts() {
     );
 }
 
-export default Posts;
+export default CatFacts;
