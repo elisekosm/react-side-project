@@ -6,16 +6,10 @@ function Navbar() {
         <nav>
             <ul>
                 <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/react-side-project/">Cat Facts</Link>
                 </li>
                 <li>
-                    <Link to="/catFacts">Cat Facts</Link>
-                </li>
-                <li>
-                    <Link to="/about">About</Link>
-                </li>
-                <li>
-                    <Link to="/contact">Contact</Link>
+                    <Link to="/react-side-project/about">About</Link>
                 </li>
             </ul>
         </nav>

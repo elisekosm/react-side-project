@@ -2,27 +2,79 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import axios from 'axios';
+import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
 
-function Posts() {
-    const [posts, setPosts] = useState([]);
+function CatFacts() {
+    const [posts, setCatFact] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [imageUrl, setImageUrl] = useState('');
+    const [error, setError] = useState('');
 
     const handleClick = () => {
         setLoading(true);
 
-        fetch('https://meowfacts.herokuapp.com/')
+        fetch(process.env.REACT_APP_CAT_FACT_URL)
             .then(response => response.json())
             .then(data => {
-                setPosts(data);
-                setLoading(false);
+                setCatFact(data);
+                generateImage(data.data[0]);
             })
             .catch(error => console.error('Error fetching data:', error));
     }
-    
+
+    const generateImage = async (prompt) => {
+        setError('');
+        try {
+            const response = await axios.post(
+                process.env.REACT_APP_IMAGE_GENERATOR_URL,
+                {
+                    key: process.env.REACT_APP_IMAGE_GENERATOR_API_KEY,
+                    prompt: prompt,
+                    negative_prompt: "",
+                    width: "400",
+                    height: "400",
+                    safety_checker: false,
+                    seed: null,
+                    samples: 1,
+                    base64: false,
+                    webhook: null,
+                    track_id: null
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            );
+
+            if (response.status !== 200 && response.status !== 204) {
+                setError('Failed to generate image.');
+            } else {
+                setImageUrl(response.data.output[0]);
+            }
+        } catch (err) {
+            setError('Failed to generate image.');
+        } finally {
+            setLoading(false);
+        }
+    }
+
     if (loading) {
         return (
             <div>
-                <p>Loading posts...</p>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <Typography variant="h4" style={{ padding: '0.5em' }}>Random Cat Facts</Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="body" style={{ padding: '0.5em' }}>Loading cat facts...</Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <CircularProgress />
+                    </Grid>
+                </Grid>
             </div>
         );
     }
@@ -31,17 +83,32 @@ function Posts() {
         <div>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Typography variant = "h4" style={{padding: '0.5em'}}>Random Cat Facts</Typography>
+                    <Typography variant="h4" style={{ padding: '0.5em' }}>Random Cat Facts</Typography>
                 </Grid>
+
                 <Grid item xs={12}>
-                    <Button onClick={handleClick} variant="contained">Generate Cat Fact</Button>                   
+                    <Button onClick={handleClick} variant="contained">Generate Cat Fact</Button>
                 </Grid>
+
+                <Grid item xs={3} />
+                <Grid item xs={6}>
+                    <Typography variant="body" style={{ margin: '50px' }}>{posts.data}</Typography>
+                </Grid>
+                <Grid item xs={3} />
+
+                <Grid item xs={3} />
+                <Grid item xs={6}>
+                    {error && <Alert severity="error">{error}</Alert>}
+                </Grid>
+                <Grid item xs={3} />
+
+
                 <Grid item xs={12}>
-                    <Typography variant = "body" style={{margin: '50px'}}>{posts.data}</Typography>
+                    {imageUrl && <img src={imageUrl} alt="Generated" style={{ marginTop: '20px', maxWidth: '100%' }} />}
                 </Grid>
             </Grid>
         </div>
     );
 }
 
-export default Posts;
+export default CatFacts;
