@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
 
 function Posts() {
     const [posts, setPosts] = useState([]);
@@ -84,16 +85,25 @@ function Posts() {
                 <Grid item xs={12}>
                     <Typography variant="h4" style={{ padding: '0.5em' }}>Random Cat Facts</Typography>
                 </Grid>
+                
                 <Grid item xs={12}>
                     <Button onClick={handleClick} variant="contained">Generate Cat Fact</Button>
                 </Grid>
+
                 <Grid item xs={3} />
                 <Grid item xs={6}>
                     <Typography variant="body" style={{ margin: '50px' }}>{posts.data}</Typography>
                 </Grid>
                 <Grid item xs={3} />
+
+                <Grid item xs={3} />
+                <Grid item xs={6}>
+                    {error && <Alert severity="error">{error}</Alert>}
+                </Grid>
+                <Grid item xs={3} />
+
+
                 <Grid item xs={12}>
-                    {error && <p style={{ color: 'red' }}>{error}</p>}
                     {imageUrl && <img src={imageUrl} alt="Generated" style={{ marginTop: '20px', maxWidth: '100%' }} />}
                 </Grid>
             </Grid>

@@ -19,7 +19,7 @@ function About() {
                 </Grid>
                 <Grid item xs={3} />
                 <Grid item xs={6}>
-                    <Typography variant="body">This is an exploratory React app made by Elise. Check out Elise's other projects on her GitHub below or connect with her on LinkedIn.</Typography>
+                    <Typography variant="body">This is an exploratory React app made by Elise. The app fetches a random cat fact from a publically available API. It then uses ModelsLab to generate a Gen AI photo of the random cat fact. Check out Elise's other projects on her GitHub below or connect with her on LinkedIn.</Typography>
                 </Grid>
                 <Grid item xs={3} />
                 <Grid item xs={5} />
